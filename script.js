@@ -34,7 +34,7 @@
   }
 
   /* drifting blurred crowd */
-  var ppl=$('#people'),cols=['#2f6fd6','#ff5a2c','#ffd02a','#1fae5a','#0e1b4d','#ffffff','#f26aa2','#12a4a0','#1b1c35','#ff9f3a'],ns='http://www.w3.org/2000/svg';
+  var ppl=$('#people'),cols=['#3976bd','#ec8b4b','#ffc36b','#69b5a8','#173b5b','#ffffff','#82b9e7','#4e9aab','#274662','#f0a05c'],ns='http://www.w3.org/2000/svg';
   function rnd(a,b){return a+Math.random()*(b-a)}
   for(var i=0;i<34;i++){
     var near=Math.random()>.55,sc=near?rnd(1.3,1.9):rnd(.6,1.0),x=rnd(20,1180),y=near?rnd(170,330):rnd(50,170),c=cols[i%cols.length];
@@ -58,7 +58,7 @@
   console.log('%cSoft signals','font:italic 28px Georgia;color:#e0359a');console.log('%cthere are a few lights to switch on. try clicking the castle, the glowing house, or the Konami code.','color:#6a6d86');
   var lit=false;$('#castle').addEventListener('click',function(){lit=!lit;castle.classList.toggle('lit',lit);toast(lit?'The windows are lit.':'Goodnight, castle.')});
   var wins=$$('.lw'),on=true;
-  function pop(el,x,y){for(var i=0;i<18;i++){var d=document.createElement('i');d.style.cssText='position:fixed;z-index:9999;pointer-events:none;border-radius:50%;width:8px;height:8px;left:'+x+'px;top:'+y+'px;background:'+['#ff5fa8','#ffd23f','#5b8def','#7be0b4'][i%4]+';box-shadow:0 0 14px currentColor;transition:all 1.4s cubic-bezier(.2,.8,.2,1);opacity:1';document.body.appendChild(d);
+  function pop(el,x,y){for(var i=0;i<18;i++){var d=document.createElement('i');d.style.cssText='position:fixed;z-index:9999;pointer-events:none;border-radius:50%;width:8px;height:8px;left:'+x+'px;top:'+y+'px;background:'+['#3976bd','#ffc36b','#82b9e7','#69b5a8'][i%4]+';box-shadow:0 0 14px currentColor;transition:all 1.4s cubic-bezier(.2,.8,.2,1);opacity:1';document.body.appendChild(d);
     (function(d){requestAnimationFrame(function(){d.style.transform='translate('+rnd(-160,160)+'px,'+rnd(-220,40)+'px) scale(.2)';d.style.opacity=0});setTimeout(function(){d.remove()},1500)})(d)}}
   $('#plume').addEventListener('click',function(e){pop(null,e.clientX,e.clientY);toast('Somebody is home.')});
   var pc=0;$$('.lw').forEach(function(w){w.style.cursor='pointer';w.style.transition='opacity .4s';w.addEventListener('click',function(){w.style.opacity=w.style.opacity==='0.15'?1:.15;if(++pc%4===0)toast('Lights out. Lights on.')})});
@@ -82,7 +82,7 @@
   var idleT,idled=false;function idleReset(){clearTimeout(idleT);idleT=setTimeout(function(){if(scrollY<innerHeight&&!idled){idled=true;castle.classList.add('lit');lit=true;wish();toast('Still here? Take your time. The windows are lit.')}},30000)}
   ['mousemove','scroll','keydown','touchstart'].forEach(function(t){addEventListener(t,idleReset,{passive:true})});idleReset();
   /* cursor trail (command: trail) */
-  var trailOn=false,tcols=['#ff5fa8','#ffd23f','#5b8def','#7be0b4','#ff7a45'],tl=0;
+  var trailOn=false,tcols=['#3976bd','#ffc36b','#82b9e7','#69b5a8','#ec8b4b'],tl=0;
   addEventListener('mousemove',function(e){if(!trailOn)return;var n=Date.now();if(n-tl<28)return;tl=n;var d=document.createElement('div');d.className='trail';d.style.left=e.clientX+'px';d.style.top=e.clientY+'px';d.style.background=tcols[Math.random()*tcols.length|0];document.body.appendChild(d);setTimeout(function(){d.remove()},1100)});
   /* blizzard (command: snow) */
   function blizzard(){for(var k=0;k<260;k++)flakes.push({x:Math.random(),y:-Math.random(),r:Math.random()*2.2+.5,s:Math.random()*.9+.4,d:Math.random()*6});setTimeout(function(){flakes.length=110},9000);night.scrollIntoView({behavior:'smooth',block:'start'});toast('It is snowing.')}
